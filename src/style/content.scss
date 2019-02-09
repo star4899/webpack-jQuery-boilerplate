@@ -1,0 +1,16 @@
+.tab-box{width:50%; margin-top:50px; background:#fff; border:1px solid #ccc; text-align:center;
+	.tab{border-bottom:1px solid #ccc;
+		ul{overflow:hidden;
+			li{float:left; width:20%;
+				&.on{background:#ddd;}
+				a{display:block; padding:10px 0; font-size:11px;}
+			}
+		}
+	}
+	.content{height:200px;
+		& > div{display:none;
+			&.on{display:block;}
+			& span{display:block;}
+		}
+	}
+}
