@@ -1,12 +1,12 @@
 import './style/style.scss';
 import "@/directive";
 
-import Zum from "@/zum-core";
+import skydown from "@/core";
 import schema from "@/schema";
 import router from "@/router";
 import layout from "@/layout";
 
-new Zum({
+new skydown({
 	schema,
 	router,
 	layout
