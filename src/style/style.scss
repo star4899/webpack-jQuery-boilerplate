@@ -1,0 +1,22 @@
+*{padding:0; margin:0;}
+a{text-decoration:none; color:#444;}
+ul, ol{list-style:none;}
+
+#wrap{overflow:hidden; text-align:center;}
+#container{width:1000px; min-height:700px; margin:0 auto 30px;}
+#header{padding:10px 0; background:rgba(0,0,0,1); color:rgb(255,255,255);}
+h1{overflow:hidden; width:1000px; margin:0 auto; text-align:left;}
+h1 span.cursor::after{display:inline-block; width:2px; height:43px; background:rgba(255,255,255,.8); vertical-align:-8px; content:"";}
+
+#footer{padding:25px 0; background:#ddd; border-top:1px solid #ccc; font-size:11px; color:#fff;}
+
+.tab-box{margin-top:50px; background:#fff; border:1px solid #ccc;}
+.tab-box .tab{border-bottom:1px solid #ccc;}
+.tab-box .tab ul{overflow:hidden;}
+.tab-box .tab li{float:left; width:20%;}
+.tab-box .tab li.on{background:#ddd;}
+.tab-box .tab a{display:block; padding:10px 0; font-size:11px;}
+.tab-box .content{height:200px;}
+.tab-box .content > div{display:none;}
+.tab-box .content > div.on{display:block;}
+.tab-box .content > div span{display:block;}

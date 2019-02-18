@@ -1,16 +1,28 @@
 "use strict"
 const path = require("path");
+
+// webpack plugin 사용을 위한 연결
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+// config object 를 합치기 위한 패키지
+const merge = require("webpack-merge");
+
+// css 관련 패키지
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
+// webpack config 모음
+const devConfig = require("./config/webpack.dev.config");
+const buildConfig = require("./config/webpack.build.config");
+
 module.exports = (env, option) => {
-	const config = {
+	const baseConfig = {
 		mode : option.mode,
-		entry : ["@babel/polyfill","./src/index.js"],
+		entry : {
+			app : ["@babel/polyfill","./src/index.js"]
+		},
 		output : {
-			path : path.resolve(__dirname + "/dist/src")
+			path : path.resolve(__dirname + "/dist")
 		},
 		module : {
 			rules : [
@@ -27,20 +39,25 @@ module.exports = (env, option) => {
 						"postcss-loader",
 						"sass-loader"
 					]
+				},
+				{
+					test : /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+					loader : "url-loader",
+					options: {
+						name : "images/[name].[ext]"
+					}
 				}
 			]
 		},
 		plugins: [
 			new webpack.ProvidePlugin({
-				$ : "jquery",
-				jQuery : "jquery"
+				$ : "jquery"
 			}),
-			new MiniCssExtractPlugin({
-				filename: "style/[name].css"
-			}),
-			new webpack.DefinePlugin({
-				"process.env" : {
-					NODE_ENV : `"${option.mode}"`
+			new OptimizeCssAssetsPlugin({
+				cssProcessorOptions : {
+					discardComments : {
+						removeAll : true
+					}
 				}
 			})
 		],
@@ -59,56 +76,15 @@ module.exports = (env, option) => {
 						enforce : true
 					}
 				}
-			}
+			},
+			minimize : true
 		},
 		resolve : {
 			alias : {
-				"@" : path.resolve(__dirname + "/src"),
-				"~" : path.resolve(__dirname, "../")
+				"@" : path.resolve(__dirname + "/src")
 			},
-			extensions : ["*", ".js", ".json"]
+			extensions: ["*", ".js", ".json"]
 		}
 	};
-	if(option.mode === "production"){
-		config.output.filename = "[name].[chunkhash].js";
-		config.plugins.push(
-			new OptimizeCssAssetsPlugin({
-				cssProcessorOptions : {
-					discardComments : {
-						removeAll : true
-					}
-				}
-			}),
-			new HtmlWebpackPlugin({
-				template : "./index.html",
-				filename : "../index.html",
-				inject : true,
-				minify : true
-			})
-		);
-	}else{
-		config.output.filename = "[name].[hash].js";
-		config.module.rules.push({
-			test : require.resolve("jquery"),
-			use : [
-				{
-					loader : "expose-loader",
-					options : "jQuery"
-				},{
-					loader : "expose-loader",
-					options : "$"
-				}
-			]
-		});
-		config.plugins.push(
-			new webpack.HotModuleReplacementPlugin(),
-			new HtmlWebpackPlugin({
-				template : "./index.html",
-				filename : "./index.html",
-				inject : true,
-				minify : true
-			})
-		);
-	};
-	return config;
+	return merge(baseConfig, option.mode === "production" ? buildConfig : devConfig);
 };

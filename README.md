@@ -1,3 +1,1 @@
-# webpack-jQuery-boilerplate
-
-
+# zum pc front boilerplate

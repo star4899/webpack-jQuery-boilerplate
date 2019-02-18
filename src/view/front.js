@@ -1,15 +1,12 @@
-import tab from "@/component/front/tab";
+import tab1 from "@/components/front/tab1";
+import tab2 from "@/components/front/tab2";
+import tab3 from "@/components/front/tab3";
 
 export default {
-	before(){
-		// console.log("before");
-		// console.log(this.$parent);
-	},
-	after(){
-		// console.log("after");
-		// console.log(this);
-	},
+	name : "front",
 	components : {
-		tab
+		tab1,
+		tab2,
+		tab3
 	}
-}
+};

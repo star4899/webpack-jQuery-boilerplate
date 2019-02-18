@@ -1,11 +1,13 @@
-import "./style/reset.scss";
-import "./style/content.scss";
+import './style/style.scss';
+import "@/directive";
 
-import "./common/common";
-import front from "./view/front";
+import Zum from "@/zum-core";
+import schema from "@/schema";
+import router from "@/router";
+import layout from "@/layout";
 
-new skydown({
-	components : {
-		front
-	}
+new Zum({
+	schema,
+	router,
+	layout
 });
