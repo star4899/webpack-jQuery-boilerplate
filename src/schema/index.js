@@ -16,6 +16,9 @@ const schema = {
 	after : {
 		type : Function
 	},
+	methods : {
+		type : Function
+	},
 	components : {
 		type : Object
 	},
