@@ -34,8 +34,8 @@
     "webpack-merge": "^4.2.1"
   },
   "scripts": {
-    "build": "webpack --mode production --progress --hide-modules",
-    "dev": "webpack-dev-server --mode development --progress --open"
+    "dev": "webpack-dev-server --mode development --progress --open",
+    "build": "rimraf dist && webpack --mode production --progress --hide-modules"
   },
   "author": "skydown (star4899@naver.com)",
   "license": "MIT"

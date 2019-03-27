@@ -65,8 +65,8 @@ module.exports = (env, option) => {
 			splitChunks : {
 				cacheGroups : {
 					vendor : {
-						test : /\.js$/,
-						chunks : "initial",
+						test : /[\\/]node_modules[\\/]/,
+						chunks : "all",
 						name : "vendor",
 						enforce : true,
 					},
