@@ -1,1 +1,1 @@
-# zum pc front boilerplate
+# webpack jQuery boilerplate
